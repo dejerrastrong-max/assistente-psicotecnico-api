@@ -48,8 +48,9 @@ Alternativas: {dados.alternativas}
             contents=prompt
         )
         return {"resposta": resposta.text}
-    except Exception:
+        except Exception as e:
+        print("ERRO GEMINI:", repr(e), flush=True)
         raise HTTPException(
-            502,
-            "Não foi possível obter resposta da IA. Tenta novamente."
+            status_code=502,
+            detail=f"Erro da IA: {type(e).__name__}: {e}"
         )
